@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>react native tp1</title>
+  <style>
+  </style>
+</head>
+<body>
+  <h1>saludo</h1>
+  <input type="text" id="nombre" placeholder="escribe un nombre">
+  <button onclick="enviarNombre()">crear</button>
+  <div id="mensaje"></div>
+
+  <script>
+    function enviarNombre() {
+      const nombre = document.getElementById('nombre').value;
+      if (!nombre) {
+        alert('ingrese un nombre por favor');
+        return;
+      }
+
+      fetch(`http://localhost:5432/saludo/${nombre}`)
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById('mensaje').textContent = data;
+        })
+        .catch(err => console.error('Error:', err));
+    }
+  </script>
+</body>
+</html>
